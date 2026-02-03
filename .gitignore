@@ -206,3 +206,27 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 .DS_Store
+
+# Terraform (do not commit local state or cache)
+**/.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+# Terraform variable files (keep only examples)
+*.tfvars
+!terraform.tfvars.example
+!*.tfvars.example
+
+# Kubernetes local config
+.kube/
+
+# Helm / charts build artifacts
+**/charts/*.tgz
+
+# macOS noise (global)
+.DS_Store
+
+# Local logs
+*.log
