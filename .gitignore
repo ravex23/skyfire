@@ -230,3 +230,9 @@ crash.*.log
 
 # Local logs
 *.log
+
+# IAM policies (generated / environment-specific)
+iam_policy.json
+
+# AWS Load Balancer Controller IAM policy (generated / local)
+infra/eks/iam_policy.json
