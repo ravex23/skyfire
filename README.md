@@ -1,18 +1,66 @@
 # SkyFire
-Cloud/DevOps platform project demonstrating a Python API deployed to AWS EKS using Infrastructure as Code and CI/CD (Terraform, Docker, GitHub Actions, Helm).
+
+Production-style cloud-native application deployed on AWS EKS with CI/CD, containerization, and secure HTTPS exposure via ALB.
+
+## 🌐 Live Demo
+https://skyfire.fabdev.co
+
+- HTTPS secured via AWS ACM
+- Exposed through AWS Application Load Balancer (ALB)
+- Running on Kubernetes (EKS)
+
+## Tech Stack
+
+- **Cloud:** AWS (EKS, ALB, ACM, ECR)
+- **Containerization:** Docker
+- **Orchestration:** Kubernetes (EKS)
+- **Infrastructure as Code:** Terraform
+- **CI/CD:** GitHub Actions
+- **Deployment:** Helm
+- **Application:** FastAPI (Python)
+
+## How It Works
+
+1. Developer pushes code to GitHub
+2. CI pipeline builds Docker image and pushes to Amazon ECR
+3. Kubernetes (EKS) pulls the image and deploys pods
+4. Service exposes the application internally
+5. AWS ALB Ingress routes external traffic to the service
+6. HTTPS is terminated at ALB using AWS ACM certificate
+7. HTTP traffic is automatically redirected to HTTPS
+
+## Key Features
+
+- Public HTTPS endpoint with custom domain
+- Kubernetes deployment with readiness & liveness probes
+- ALB Ingress with SSL termination
+- HTTP → HTTPS redirect enforced
+- Containerized FastAPI application
 
 ## Architecture Diagram
 
-SkyFire v1 is powered by a modern DevOps pipeline. Here’s how it works:
+SkyFire v1 follows a production-style DevOps pipeline:
 
 ![SkyFire Architecture](docs/architecture/skyfire-v1-architecture.jpg)
 
 This diagram shows the full CI/CD lifecycle, from a developer git push to automated build, containerization, and deployment on AWS EKS.
 
-### Purpose 
+## Purpose
 
-SkyFire v1 is a small platform project I am building to better understand how real cloud systems are deployed.
+SkyFire v1 is a cloud-native DevOps project designed to simulate how modern applications are deployed in production environments.
 
-The application itself is intentionally simple. The main purpose of this project is to practice what I have learned so far about infrastructure, automation, and deployment, and to deploy an application the same way a real company would do it in production.
+The focus of this project is not on application complexity, but on:
+- Infrastructure design
+- Automation
+- CI/CD pipelines
+- Secure and scalable deployment on AWS
 
-My main focus is on how things are built, automated, and deployed rather than on application features. This project may look messy at times, but it is just the beginning. The goal is not to have ChatGPT generate everything, but to rely on documentation and tooling to fully understand what I am creating.
+This project reflects a hands-on approach to learning by building, debugging, and operating real systems using industry-standard tools.
+
+## Challenges & Lessons Learned
+
+- Resolved Docker image architecture mismatch (ARM vs AMD64) when deploying from Apple Silicon to EKS
+- Debugged ImagePullBackOff errors caused by incorrect image builds
+- Configured AWS ALB Ingress Controller with proper annotations for HTTPS and SSL termination
+- Implemented ACM certificate validation and DNS configuration for custom domain
+- Understood traffic flow from DNS → ALB → Ingress → Service → Pod
